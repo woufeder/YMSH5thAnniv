@@ -11,8 +11,6 @@
   <link rel="stylesheet" href="css/start.css">
   <link rel="stylesheet" href="css/dialogue.css">
   <style>
-
-
     .snowflake {
       position: absolute;
       top: -10px;
@@ -63,51 +61,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"></script>
-    <script>    window.addEventListener('DOMContentLoaded', () => {
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('fade-in');
       });</script>
     <script>
-const NUM = 30;
-for (let i = 0; i < NUM; i++) {
-  const flake = document.createElement("div");
-  flake.classList.add("snowflake");
-  flake.textContent = "●";
-  document.body.appendChild(flake);
+      const NUM = 30;
+      for (let i = 0; i < NUM; i++) {
+        const flake = document.createElement("div");
+        flake.classList.add("snowflake");
+        flake.textContent = "●";
+        document.body.appendChild(flake);
 
-  const size = Math.random() * 1 + 5;
-  const startY = Math.random() * window.innerHeight;   // 從畫面上方不同高度進場
-  const drift = Math.random() * 700 + 300;             // 控制整體風向
-  const duration = Math.random() * 5 + 6;
-  const delay = Math.random() * 5;
+        const size = Math.random() * 1 + 5;
+        const startY = Math.random() * window.innerHeight;   // 從畫面上方不同高度進場
+        const drift = Math.random() * 700 + 300;             // 控制整體風向
+        const duration = Math.random() * 5 + 6;
+        const delay = Math.random() * 5;
 
-  gsap.set(flake, {
-    fontSize: size,
-    x: -40,                      // 從畫面左外側開始
-    y: startY,
-    opacity: Math.random() * 0.6 + 0.1
-  });
+        gsap.set(flake, {
+          fontSize: size,
+          x: -40,                      // 從畫面左外側開始
+          y: startY,
+          opacity: Math.random() * 0.6 + 0.1
+        });
 
-  // 主動畫：水平橫掃
-  gsap.to(flake, {
-    x: window.innerWidth + 40,   // 掃到畫面右外
-    y: startY + drift,           // 帶一點斜率，整體略往下或上
-    rotation: Math.random() * 180 - 90,
-    duration,
-    delay,
-    repeat: -1,
-    ease: "none"
-  });
+        // 主動畫：水平橫掃
+        gsap.to(flake, {
+          x: window.innerWidth + 40,   // 掃到畫面右外
+          y: startY + drift,           // 帶一點斜率，整體略往下或上
+          rotation: Math.random() * 180 - 90,
+          duration,
+          delay,
+          repeat: -1,
+          ease: "none"
+        });
 
-  // 疊加上下輕微晃動（模擬風浪）
-  gsap.to(flake, {
-    y: `+=${Math.random() * 200 - 100}`,
-    duration: Math.random() * 3 + 2,
-    yoyo: true,
-    repeat: -1,
-    ease: "sine.inOut"
-  });
-}
-
+        // 疊加上下輕微晃動（模擬風浪）
+        gsap.to(flake, {
+          y: `+=${Math.random() * 200 - 100}`,
+          duration: Math.random() * 3 + 2,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut"
+        });
+      }
 
     </script>
   </body>

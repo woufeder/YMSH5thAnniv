@@ -1,5 +1,5 @@
 [
-  { "name": "456", "year": 5, "class": 3 },
-  { "name": "張雅雯", "year": 5, "class": 1 },
-  { "name": "王哲宇", "year": 4, "class": 2 }
+  { "name": "456", "year": 5, "class": "一年仁班" },
+  { "name": "張雅雯", "year": 5, "class": "一年仁班" },
+  { "name": "王哲宇", "year": 4, "class": "二年仁班" }
 ]

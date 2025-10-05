@@ -66,6 +66,4 @@ function nextLine() {
 }
 
 
-
-
 init();
