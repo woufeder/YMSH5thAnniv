@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YMSH 5週年紀念 - 穿堂留言板</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/hall.css">
+</head>
+<body>
+    <div class="hall-container">
+        <h1>穿堂留言板</h1>
+        <div class="message-board">
+            <div class="message-form">
+                <input type="text" id="messageInput" placeholder="留下您的祝福訊息...">
+                <button id="submitMessage">送出留言</button>
+            </div>
+            <div class="messages-list" id="messagesList">
+                <!-- 留言將由 JavaScript 動態載入 -->
+            </div>
+        </div>
+        <button id="backToMap" class="back-btn">返回地圖</button>
+    </div>
+    <script src="js/utils.js"></script>
+    <script src="js/hall.js"></script>
+</body>
+</html>

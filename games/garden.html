@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YMSH 5週年紀念 - 花園種樹</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/garden.css">
+</head>
+<body>
+    <div class="garden-game">
+        <h1>花園 - 種植紀念樹</h1>
+        <div class="garden-area">
+            <div class="tree-container" id="treeContainer">
+                <!-- 樹木生長動畫區域 -->
+            </div>
+            <div class="planting-controls">
+                <button id="waterBtn" class="plant-btn">澆水</button>
+                <button id="sunlightBtn" class="plant-btn">給予陽光</button>
+                <button id="fertilizeBtn" class="plant-btn">施肥</button>
+            </div>
+        </div>
+        <div class="progress-info">
+            <div class="growth-bar">
+                <div class="growth-fill" id="growthFill"></div>
+            </div>
+            <span id="growthText">生長進度: 0%</span>
+        </div>
+        <button id="backToMap" class="back-btn">返回地圖</button>
+    </div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/garden.js"></script>
+</body>
+</html>

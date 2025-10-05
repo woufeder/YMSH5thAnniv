@@ -1,0 +1,451 @@
+/* lab.css - 電路解謎樣式 */
+
+.lab-game {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.circuit-board {
+    background: linear-gradient(135deg, #263238 0%, #37474f 100%);
+    border-radius: var(--border-radius-large);
+    padding: 30px;
+    margin: 30px auto;
+    box-shadow: var(--shadow-heavy);
+    position: relative;
+}
+
+.circuit-board::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 20px,
+        rgba(255, 255, 255, 0.05) 20px,
+        rgba(255, 255, 255, 0.05) 21px
+    ),
+    repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 20px,
+        rgba(255, 255, 255, 0.05) 20px,
+        rgba(255, 255, 255, 0.05) 21px
+    );
+    border-radius: var(--border-radius-large);
+}
+
+.circuit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.circuit-cell {
+    aspect-ratio: 1;
+    background: #455a64;
+    border: 2px solid #607d8b;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.circuit-cell:hover {
+    background: #546e7a;
+    transform: translateY(-2px);
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.3),
+        0 4px 8px rgba(0,0,0,0.2);
+}
+
+.circuit-cell.clickable {
+    border-color: #81c784;
+    animation: pulse 2s infinite;
+}
+
+.circuit-cell.clickable:hover {
+    border-color: #4caf50;
+    background: #4caf50;
+    color: white;
+}
+
+.circuit-cell.fixed {
+    background: #1976d2;
+    border-color: #1565c0;
+    cursor: not-allowed;
+    color: white;
+}
+
+.circuit-cell.correct {
+    background: var(--success-color);
+    border-color: var(--school-green);
+    animation: correctPulse 0.6s ease;
+}
+
+.circuit-cell.wrong {
+    background: var(--error-color);
+    border-color: #c62828;
+    animation: shake 0.5s ease;
+}
+
+/* 電流流動效果 */
+.circuit-cell.powered {
+    background: #ffd600;
+    border-color: #ff8f00;
+    color: #333;
+    animation: electric 1s ease-in-out infinite;
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.1),
+        0 0 20px rgba(255, 214, 0, 0.5);
+}
+
+@keyframes electric {
+    0%, 100% {
+        box-shadow: 
+            inset 0 2px 4px rgba(0,0,0,0.1),
+            0 0 20px rgba(255, 214, 0, 0.5);
+    }
+    50% {
+        box-shadow: 
+            inset 0 2px 4px rgba(0,0,0,0.1),
+            0 0 30px rgba(255, 214, 0, 0.8);
+    }
+}
+
+@keyframes correctPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.lab-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.lab-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    min-width: 140px;
+}
+
+#testCircuit {
+    background: linear-gradient(45deg, #4caf50, #66bb6a);
+    border: none;
+    color: white;
+}
+
+#testCircuit:hover {
+    background: linear-gradient(45deg, #388e3c, #4caf50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+#resetCircuit {
+    background: linear-gradient(45deg, #ff9800, #ffb74d);
+    border: none;
+    color: white;
+}
+
+#resetCircuit:hover {
+    background: linear-gradient(45deg, #f57c00, #ff9800);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+#hintBtn {
+    background: linear-gradient(45deg, #2196f3, #64b5f6);
+    border: none;
+    color: white;
+}
+
+#hintBtn:hover {
+    background: linear-gradient(45deg, #1976d2, #2196f3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+#hintBtn:disabled {
+    background: #bdbdbd;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.circuit-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.status-light {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f44336;
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.2),
+        0 0 10px rgba(244, 67, 54, 0.3);
+    transition: var(--transition);
+}
+
+.status-light.green {
+    background: #4caf50;
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.2),
+        0 0 15px rgba(76, 175, 80, 0.5);
+    animation: statusBlink 1s ease-in-out infinite;
+}
+
+.status-light.orange {
+    background: #ff9800;
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.2),
+        0 0 10px rgba(255, 152, 0, 0.4);
+}
+
+.status-light.yellow {
+    background: #ffeb3b;
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.2),
+        0 0 10px rgba(255, 235, 59, 0.4);
+}
+
+@keyframes statusBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+#statusText {
+    font-weight: bold;
+    color: var(--school-blue);
+    font-size: 18px;
+}
+
+/* 提示系統 */
+.hint-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-heavy);
+    z-index: 1000;
+    max-width: 400px;
+    text-align: center;
+    animation: popIn 0.3s ease;
+}
+
+.hint-popup::before {
+    content: '💡';
+    font-size: 2em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.hint-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* 勝利效果 */
+.victory-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffd600;
+    border-radius: 50%;
+    animation: sparkle 1s linear infinite;
+}
+
+@keyframes sparkle {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .circuit-board {
+        padding: 20px;
+    }
+    
+    .circuit-grid {
+        max-width: 300px;
+        gap: 8px;
+    }
+    
+    .circuit-cell {
+        font-size: 20px;
+    }
+    
+    .lab-controls {
+        gap: 15px;
+    }
+    
+    .lab-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        min-width: 120px;
+    }
+    
+    .circuit-status {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #statusText {
+        font-size: 16px;
+    }
+    
+    .hint-popup {
+        padding: 20px;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .circuit-grid {
+        max-width: 250px;
+        gap: 6px;
+    }
+    
+    .circuit-cell {
+        font-size: 16px;
+    }
+    
+    .lab-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .lab-btn {
+        width: 200px;
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
+
+/* 無障礙改善 */
+.circuit-cell:focus {
+    outline: 3px solid var(--school-gold);
+    outline-offset: 2px;
+}
+
+.circuit-cell[role="button"] {
+    position: relative;
+}
+
+/* 高對比模式 */
+@media (prefers-contrast: high) {
+    .circuit-board {
+        background: #000000;
+        border: 2px solid #ffffff;
+    }
+    
+    .circuit-cell {
+        background: #333333;
+        border-color: #ffffff;
+        color: #ffffff;
+    }
+    
+    .circuit-cell.clickable {
+        border-color: #00ff00;
+    }
+    
+    .circuit-cell.fixed {
+        background: #0000ff;
+        border-color: #ffffff;
+    }
+    
+    .circuit-cell.correct {
+        background: #00ff00;
+        border-color: #000000;
+        color: #000000;
+    }
+    
+    .circuit-cell.wrong {
+        background: #ff0000;
+        border-color: #ffffff;
+        color: #ffffff;
+    }
+}

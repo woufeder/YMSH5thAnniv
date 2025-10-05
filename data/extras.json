@@ -1,0 +1,284 @@
+{
+  "secrets": [
+    {
+      "id": "secret_1",
+      "name": "隱藏彩蛋 #1",
+      "description": "恭喜您發現了第一個隱藏彩蛋！",
+      "location": "classroom",
+      "triggerCondition": "click_corner_multiple_times",
+      "triggerData": {
+        "element": ".classroom-game h1",
+        "clickCount": 5,
+        "timeLimit": 10000
+      },
+      "reward": {
+        "points": 50,
+        "message": "您發現了教室的隱藏秘密！",
+        "emoji": "🎯"
+      },
+      "unlocked": false
+    },
+    {
+      "id": "secret_2",
+      "name": "隱藏彩蛋 #2",
+      "description": "您真的很細心呢！",
+      "location": "garden",
+      "triggerCondition": "water_tree_many_times",
+      "triggerData": {
+        "action": "water",
+        "count": 10,
+        "sessionBased": true
+      },
+      "reward": {
+        "points": 75,
+        "message": "澆水10次解鎖了特殊獎勵！",
+        "emoji": "💧"
+      },
+      "unlocked": false
+    },
+    {
+      "id": "secret_3",
+      "name": "電路大師",
+      "description": "一次就解決電路謎題的天才！",
+      "location": "lab",
+      "triggerCondition": "solve_without_reset",
+      "triggerData": {
+        "resetCount": 0,
+        "hintCount": 0,
+        "timeLimit": 180000
+      },
+      "reward": {
+        "points": 100,
+        "message": "完美的電路解決方案！",
+        "emoji": "⚡"
+      },
+      "unlocked": false
+    },
+    {
+      "id": "secret_4",
+      "name": "時間旅行者",
+      "description": "在特定時間發現的彩蛋",
+      "location": "map",
+      "triggerCondition": "visit_at_special_time",
+      "triggerData": {
+        "hour": 14,
+        "minute": 30,
+        "tolerance": 300000
+      },
+      "reward": {
+        "points": 25,
+        "message": "您在特殊時刻發現了這個彩蛋！",
+        "emoji": "⏰"
+      },
+      "unlocked": false
+    },
+    {
+      "id": "secret_5",
+      "name": "社交達人",
+      "description": "在留言板留下多條訊息",
+      "location": "hall",
+      "triggerCondition": "multiple_messages",
+      "triggerData": {
+        "messageCount": 3,
+        "minLength": 10
+      },
+      "reward": {
+        "points": 60,
+        "message": "感謝您的熱情參與！",
+        "emoji": "💬"
+      },
+      "unlocked": false
+    },
+    {
+      "id": "secret_6",
+      "name": "探索者之心",
+      "description": "訪問所有區域",
+      "location": "global",
+      "triggerCondition": "visit_all_areas",
+      "triggerData": {
+        "requiredAreas": ["classroom", "garden", "lab", "principal", "hall", "extras"],
+        "minVisitTime": 30000
+      },
+      "reward": {
+        "points": 150,
+        "message": "您是真正的探索者！",
+        "emoji": "🗺️"
+      },
+      "unlocked": false
+    },
+    {
+      "id": "secret_7",
+      "name": "速度之星",
+      "description": "快速完成所有遊戲",
+      "location": "global",
+      "triggerCondition": "complete_all_quickly",
+      "triggerData": {
+        "maxTotalTime": 600000,
+        "requiredGames": ["classroom", "garden", "lab"]
+      },
+      "reward": {
+        "points": 200,
+        "message": "驚人的速度完成！",
+        "emoji": "🌟"
+      },
+      "unlocked": false
+    },
+    {
+      "id": "secret_8",
+      "name": "完美主義者",
+      "description": "獲得所有成就",
+      "location": "global",
+      "triggerCondition": "unlock_all_achievements",
+      "triggerData": {
+        "requiredAchievements": ["completionist", "speedster", "gardener", "genius"]
+      },
+      "reward": {
+        "points": 300,
+        "message": "您是真正的完美主義者！",
+        "emoji": "🏆"
+      },
+      "unlocked": false
+    }
+  ],
+
+  "konami": {
+    "enabled": true,
+    "sequence": ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA"],
+    "reward": {
+      "secretId": "konami_code",
+      "name": "經典密技",
+      "description": "您知道經典的Konami密技！",
+      "points": 1000,
+      "message": "🎮 經典密技啟動！獲得超級獎勵！",
+      "emoji": "🎮",
+      "special": true
+    }
+  },
+
+  "eastereggs": {
+    "clickSequences": [
+      {
+        "id": "title_clicks",
+        "selector": "h1",
+        "clickCount": 7,
+        "timeWindow": 5000,
+        "reward": {
+          "message": "標題連點彩蛋發現！",
+          "points": 30,
+          "emoji": "🎯"
+        }
+      },
+      {
+        "id": "corner_taps",
+        "selector": ".map-area",
+        "position": "corners",
+        "tapCount": 4,
+        "timeWindow": 8000,
+        "reward": {
+          "message": "四角點擊彩蛋解鎖！",
+          "points": 40,
+          "emoji": "📐"
+        }
+      }
+    ],
+
+    "keyboardShortcuts": [
+      {
+        "id": "debug_mode",
+        "keys": ["KeyD", "KeyE", "KeyB", "KeyU", "KeyG"],
+        "reward": {
+          "message": "開發者模式彩蛋！",
+          "points": 100,
+          "emoji": "👨‍💻",
+          "action": "enable_debug"
+        }
+      }
+    ],
+
+    "timeBasedSecrets": [
+      {
+        "id": "midnight_visitor",
+        "timeRange": {
+          "start": "23:45",
+          "end": "00:15"
+        },
+        "reward": {
+          "message": "深夜訪客彩蛋！",
+          "points": 80,
+          "emoji": "🌙"
+        }
+      },
+      {
+        "id": "early_bird",
+        "timeRange": {
+          "start": "05:00",
+          "end": "07:00"
+        },
+        "reward": {
+          "message": "早起的鳥兒有蟲吃！",
+          "points": 60,
+          "emoji": "🐦"
+        }
+      }
+    ]
+  },
+
+  "specialEvents": {
+    "schoolBirthday": {
+      "date": "2024-10-01",
+      "duration": 86400000,
+      "rewards": {
+        "loginBonus": {
+          "points": 100,
+          "message": "校慶日登入獎勵！",
+          "emoji": "🎂"
+        },
+        "completionBonus": {
+          "multiplier": 2,
+          "message": "校慶日完成獎勵加倍！"
+        }
+      }
+    },
+
+    "weekendBonus": {
+      "days": [0, 6],
+      "rewards": {
+        "pointsMultiplier": 1.5,
+        "message": "週末獎勵加成！"
+      }
+    }
+  },
+
+  "hiddenMessages": [
+    {
+      "trigger": "view_source",
+      "message": "看程式碼的您真是太厲害了！<!-- 隱藏彩蛋：source_viewer -->",
+      "reward": {
+        "points": 150,
+        "emoji": "💻"
+      }
+    },
+    {
+      "trigger": "console_easter",
+      "message": "console.log('如果您看到這條訊息，恭喜發現彩蛋！');",
+      "reward": {
+        "points": 120,
+        "emoji": "🔍"
+      }
+    }
+  ],
+
+  "unlockConditions": {
+    "extremeExplorer": {
+      "description": "發現所有彩蛋的終極探索者",
+      "condition": "unlock_all_secrets",
+      "reward": {
+        "title": "彩蛋收集大師",
+        "points": 1000,
+        "specialCard": true,
+        "message": "您已經發現了所有的隱藏彩蛋！您是真正的探索大師！",
+        "emoji": "🥇"
+      }
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "version": "1.0.0",
+  "gameTitle": "YMSH 5週年紀念",
+  "totalBadges": 5,
+  "requiredGames": ["classroom", "garden", "lab"],
+  "optionalAreas": ["principal", "hall", "extras"],
+  
+  "badges": [
+    {
+      "id": "classroom",
+      "name": "記憶大師",
+      "emoji": "🧠",
+      "description": "完成翻牌記憶遊戲",
+      "category": "game",
+      "required": true,
+      "points": 100
+    },
+    {
+      "id": "garden",
+      "name": "綠手指",
+      "emoji": "🌱",
+      "description": "成功種植紀念樹",
+      "category": "game",
+      "required": true,
+      "points": 100
+    },
+    {
+      "id": "lab",
+      "name": "小愛迪生",
+      "emoji": "⚡",
+      "description": "解決電路謎題",
+      "category": "game",
+      "required": true,
+      "points": 100
+    },
+    {
+      "id": "explorer",
+      "name": "探索者",
+      "emoji": "🗺️",
+      "description": "發現隱藏彩蛋",
+      "category": "achievement",
+      "required": false,
+      "points": 50
+    },
+    {
+      "id": "message_writer",
+      "name": "留言家",
+      "emoji": "✍️",
+      "description": "在留言板留下祝福",
+      "category": "social",
+      "required": false,
+      "points": 25
+    }
+  ],
+
+  "gameSettings": {
+    "classroom": {
+      "cardPairs": 8,
+      "maxTime": 300,
+      "perfectScore": 100,
+      "timeBonus": 2,
+      "movesPenalty": 1,
+      "difficulty": "normal"
+    },
+    "garden": {
+      "maxGrowth": 100,
+      "waterGrowth": 15,
+      "sunlightGrowth": 10,
+      "fertilizeGrowth": 20,
+      "cooldownTime": 5000,
+      "autoDecay": false
+    },
+    "lab": {
+      "gridSize": 4,
+      "maxHints": 3,
+      "hintPenalty": 10,
+      "timeLimit": 0,
+      "difficulty": "beginner"
+    }
+  },
+
+  "achievements": [
+    {
+      "id": "completionist",
+      "name": "完美主義者",
+      "description": "完成所有必修關卡",
+      "emoji": "🏆",
+      "condition": "complete_all_required",
+      "points": 200,
+      "hidden": false
+    },
+    {
+      "id": "speedster",
+      "name": "閃電俠",
+      "description": "在60秒內完成翻牌遊戲",
+      "emoji": "⚡",
+      "condition": "classroom_time_under_60",
+      "points": 150,
+      "hidden": false
+    },
+    {
+      "id": "gardener",
+      "name": "園藝師",
+      "description": "在5分鐘內種出完整的樹",
+      "emoji": "🌳",
+      "condition": "garden_fast_growth",
+      "points": 150,
+      "hidden": false
+    },
+    {
+      "id": "genius",
+      "name": "天才",
+      "description": "不使用提示完成電路謎題",
+      "emoji": "🎓",
+      "condition": "lab_no_hints",
+      "points": 200,
+      "hidden": false
+    },
+    {
+      "id": "explorer_master",
+      "name": "探索大師",
+      "description": "發現所有隱藏彩蛋",
+      "emoji": "🕵️",
+      "condition": "find_all_secrets",
+      "points": 300,
+      "hidden": true
+    }
+  ],
+
+  "ui": {
+    "colors": {
+      "primary": "#1565c0",
+      "secondary": "#42a5f5",
+      "success": "#4caf50",
+      "warning": "#ff9800",
+      "error": "#f44336",
+      "schoolBlue": "#0d47a1",
+      "schoolGold": "#ffc107"
+    },
+    "animations": {
+      "fadeSpeed": 300,
+      "slideSpeed": 400,
+      "bounceScale": 1.1
+    },
+    "sounds": {
+      "enabled": true,
+      "volume": 0.5,
+      "files": {
+        "click": "click.mp3",
+        "success": "complete.mp3",
+        "ambient": "wind.mp3",
+        "bgm": "bgm.mp3"
+      }
+    }
+  },
+
+  "features": {
+    "googleSheets": {
+      "enabled": true,
+      "sheetId": "YOUR_GOOGLE_SHEET_ID",
+      "webAppUrl": "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
+    },
+    "analytics": {
+      "enabled": false,
+      "trackingId": ""
+    },
+    "socialSharing": {
+      "enabled": true,
+      "platforms": ["facebook", "line", "twitter"]
+    },
+    "accessibility": {
+      "highContrast": true,
+      "reducedMotion": true,
+      "screenReader": true
+    }
+  },
+
+  "limits": {
+    "maxNameLength": 20,
+    "maxMessageLength": 200,
+    "maxHintsPerGame": 3,
+    "sessionTimeout": 3600000
+  },
+
+  "metadata": {
+    "createdDate": "2024-10-01",
+    "lastUpdated": "2024-10-01",
+    "version": "1.0.0",
+    "author": "YMSH 5週年紀念團隊",
+    "description": "YMSH 學校 5 週年紀念互動遊戲設定檔"
+  }
+}

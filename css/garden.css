@@ -1,0 +1,421 @@
+/* garden.css - 種樹動畫樣式 */
+
+.garden-game {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.garden-area {
+    background: linear-gradient(to bottom, #87ceeb 0%, #98fb98 30%, #228b22 100%);
+    border-radius: var(--border-radius-large);
+    padding: 40px;
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-heavy);
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tree-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    min-height: 200px;
+}
+
+.tree-stage {
+    transition: all 0.8s ease-in-out;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    animation: gentle-sway 3s ease-in-out infinite;
+}
+
+@keyframes gentle-sway {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(1deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+}
+
+.planting-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.plant-btn {
+    padding: 15px 25px;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    min-width: 120px;
+}
+
+#waterBtn {
+    background: linear-gradient(45deg, #2196f3, #03a9f4);
+    border: none;
+}
+
+#waterBtn:hover {
+    background: linear-gradient(45deg, #1976d2, #0288d1);
+    transform: translateY(-3px);
+}
+
+#waterBtn:disabled {
+    background: #b0bec5;
+}
+
+#sunlightBtn {
+    background: linear-gradient(45deg, #ff9800, #ffc107);
+    color: #333;
+}
+
+#sunlightBtn:hover {
+    background: linear-gradient(45deg, #f57c00, #ffb300);
+    transform: translateY(-3px);
+}
+
+#sunlightBtn:disabled {
+    background: #d7ccc8;
+}
+
+#fertilizeBtn {
+    background: linear-gradient(45deg, #795548, #8d6e63);
+}
+
+#fertilizeBtn:hover {
+    background: linear-gradient(45deg, #5d4037, #6d4c41);
+    transform: translateY(-3px);
+}
+
+#fertilizeBtn:disabled {
+    background: #bcaaa4;
+}
+
+.plant-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.plant-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+.progress-info {
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.growth-bar {
+    width: 100%;
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.growth-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #8bc34a, #cddc39);
+    border-radius: 15px;
+    transition: width 1s ease-out;
+    position: relative;
+}
+
+.growth-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.3) 50%, 
+        transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+#growthText {
+    font-weight: bold;
+    color: var(--school-green);
+    font-size: 18px;
+}
+
+/* 生長特效 */
+.growth-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: growthFloat 2s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes growthFloat {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        transform: translate(-50%, -80%) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -120%) scale(1);
+    }
+}
+
+/* 環境特效 */
+.garden-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.1) 50%, 
+        transparent 100%);
+    animation: sunlight 4s ease-in-out infinite;
+}
+
+@keyframes sunlight {
+    0%, 100% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+}
+
+/* 雲朵裝飾 */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    opacity: 0.7;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+}
+
+.cloud-1 {
+    width: 80px;
+    height: 30px;
+    top: 20px;
+    left: 10%;
+    animation: float 15s ease-in-out infinite;
+}
+
+.cloud-1::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 10px;
+}
+
+.cloud-1::after {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    right: 10px;
+}
+
+.cloud-2 {
+    width: 60px;
+    height: 25px;
+    top: 40px;
+    right: 15%;
+    animation: float 20s ease-in-out infinite reverse;
+}
+
+.cloud-2::before {
+    width: 30px;
+    height: 30px;
+    top: -15px;
+    left: 8px;
+}
+
+.cloud-2::after {
+    width: 35px;
+    height: 35px;
+    top: -18px;
+    right: 8px;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+}
+
+/* 完成慶祝效果 */
+.celebration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--school-gold);
+    animation: confetti-fall 3s linear infinite;
+}
+
+.confetti:nth-child(odd) {
+    background: var(--success-color);
+    animation-delay: -0.5s;
+}
+
+.confetti:nth-child(3n) {
+    background: var(--primary-color);
+    animation-delay: -1s;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .garden-area {
+        padding: 30px 20px;
+        min-height: 300px;
+    }
+    
+    .planting-controls {
+        gap: 15px;
+    }
+    
+    .plant-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+        min-width: 100px;
+    }
+    
+    .tree-stage {
+        font-size: 3em;
+    }
+    
+    .progress-info {
+        padding: 15px;
+    }
+    
+    .growth-bar {
+        height: 25px;
+    }
+    
+    #growthText {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .planting-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .plant-btn {
+        width: 200px;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    .tree-stage {
+        font-size: 2.5em;
+    }
+    
+    .garden-area {
+        padding: 20px 15px;
+        min-height: 250px;
+    }
+}
+
+/* 暗色模式調整 */
+@media (prefers-color-scheme: dark) {
+    .garden-area {
+        background: linear-gradient(to bottom, #2c5aa0 0%, #2e7d32 30%, #1b5e20 100%);
+    }
+    
+    .progress-info {
+        background: rgba(66, 66, 66, 0.9);
+        color: #f5f5f5;
+    }
+    
+    .cloud {
+        background: rgba(200, 200, 200, 0.6);
+    }
+    
+    .cloud::before,
+    .cloud::after {
+        background: rgba(200, 200, 200, 0.6);
+    }
+}
