@@ -226,3 +226,17 @@ function hideLoading(loader) {
         loader.parentNode.removeChild(loader);
     }
 }
+
+
+// 淡入淡出
+function fadeTo(url, elementId = 'scene-container') {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  el.style.transition = 'opacity 0.6s ease';
+  el.style.opacity = 0;
+
+  el.addEventListener('transitionend', () => {
+    window.location.href = url;
+  }, { once: true });
+}

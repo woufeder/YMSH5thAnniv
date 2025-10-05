@@ -1,0 +1,5 @@
+[
+  { "char": "principal.png", "name": "校長", "text": "啊，{{name}}。我還記得你——第{{year}}屆 {{class}} 班的學生吧？" },
+  { "char": "principal.png", "name": "校長", "text": "真好，你又回來了。這裡依舊在風裡等著大家。" },
+  { "char": "", "name": "", "text": "校門緩緩開啟，記憶的聲音從走廊裡傳出。" }
+]
