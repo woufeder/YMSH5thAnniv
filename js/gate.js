@@ -51,7 +51,6 @@ function replaceVars(str) {
   if (!studentInfo) return str;
   return str
     .replaceAll('{{name}}', studentInfo.name)
-    .replaceAll('{{year}}', studentInfo.year)
     .replaceAll('{{class}}', studentInfo.class);
 }
 
@@ -59,7 +58,7 @@ async function handleNameSubmit() {
   const input = playerInput.value.trim();
   if (!input) return alert('請輸入名字');
 
-  studentInfo = studentData.find(s => s.name === input);
+  studentInfo = studentData.find(s => s.name == input);
 
   // 按下確定 → 把輸入框隱藏回去
   inputArea.classList.add('hidden');
