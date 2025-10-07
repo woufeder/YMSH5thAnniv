@@ -5,8 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YMSH 5th Anniversary</title>
+  <link rel="icon" href="assets/images/ui/YMSH.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -17,22 +21,34 @@
 
 </head>
 
-<body>
-  <div class="bg"></div>
-  <div class="snow-container"></div>
+<body id="index">
+  <div>
+    <div class="bg"></div>
+    <div class="snow-container"></div>
+  </div>
 
 
-  <div id="index" class="scene-container d-flex flex-column justify-content-center align-items-center">
+  <div  class="scene-container container d-flex flex-column justify-content-center align-items-center">
+
+    <button type="button" class="btn question-icon" data-bs-container="body" data-bs-toggle="popover"
+      data-bs-placement="right" data-bs-content="本網為噗浪企劃《永明高中》五周年紀念網站。學生名冊之資料屬於角色創作者，官方僅作資料登入，非企劃玩家請勿挪用或進行二次發布。">
+      <i class="fa-solid fa-circle-question"></i>
+    </button>
+
 
     <!-- LOGO層 -->
     <div class="LOGO-layer d-flex flex-column justify-content-center align-items-center">
       <img id="LOGO" src="assets/images/title.png" alt="LOGO" />
       <h4 class="subtitle">五周年紀念網站</h4>
     </div>
+    <!-- 輸入名字 -->
     <div>
-      <input type="text" name="" id="">
+      <div class="input-group input-group-lg mt-4">
+        <input id="playerName" type="text" class="form-control" placeholder="請輸入您的姓名" aria-label="Recipient’s username"
+          aria-describedby="submitName">
+        <a id="submitName" class="btn btn-primary" type="button" href="preduce.html">確認</a>
+      </div>
     </div>
-
   </div>
   <!-- <script src="js/main.js"></script> -->
   <script src="js/utils.js"></script>
@@ -40,12 +56,15 @@
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
     crossorigin="anonymous"></script>
   <script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
     gsap.to(".bg", {
       duration: 8,
       repeat: -1,
       ease: "none",
       onUpdate() {
-        const t = Math.sin(this.progress() * Math.PI * 2) * 0.15 + 0.9; // 在 1.0~1.3 間平滑波動
+        const t = Math.sin(this.progress() * Math.PI * 2) * 0.15 + 0.95; // 在 1.0~1.3 間平滑波動
         const blur = Math.sin(this.progress() * Math.PI * 2) * 1 + 2;    // 在 1~3px 間平滑波動
         gsap.set(".bg", { filter: `blur(${blur}px) brightness(${t})` });
       }
@@ -95,6 +114,47 @@
     }
 
   </script>
+
+  <script src="data/member.js"></script> <!-- 先載入學生名單 -->
+  <script>
+    const submitName = document.querySelector('#submitName');
+    const playerInput = document.querySelector('#playerName');
+
+    submitName?.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const name = (playerInput?.value || '').trim();
+      if (!name) {
+        alert('請輸入名字');
+        playerInput?.focus();
+        return;
+      }
+
+      localStorage.setItem('playerName', name);
+
+      // 檢查是否載入成功
+      if (!window.memberData || !Array.isArray(window.memberData)) {
+        console.error('memberData 未載入');
+        alert('名冊未載入');
+        return;
+      }
+
+      const found = window.memberData.find(
+        s => s.name.trim().normalize() === name.normalize()
+      );
+
+      if (found) {
+        localStorage.setItem('playerRole', found.role);
+        localStorage.setItem('playerClass', found.class);
+      } else {
+        localStorage.setItem('playerRole', 'guest');
+        localStorage.setItem('playerClass', '訪客');
+      }
+
+      window.location.href = 'preduce.html';
+    });
+  </script>
+
 </body>
 
 </html>

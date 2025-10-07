@@ -6,7 +6,7 @@
   --primary700: #474D64;
   --primary900: #343742;
   --text-color: #fff;
-  /* --highlight-color: #ff4081; */
+
 }
 
 h1 {
@@ -89,12 +89,35 @@ body.fade-in {
   opacity: 1;
 }
 
+.scene-container {
+  height: 100vh;
+}
+
 /* 首頁 */
-
-
 
 #index {
   height: 100vh;
+
+  .bg {
+    position: fixed;
+    inset: 0;
+    background: url(../assets/images/BannerBG.png) center/cover no-repeat;
+    filter: brightness(1) blur(0px);
+    transition: filter 0.3s ease;
+    z-index: -1;
+  }
+
+  .question-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 32px;
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 2;
+    
+
+  }
 
   .LOGO-layer {
     display: flex;
@@ -106,7 +129,7 @@ body.fade-in {
 
     img {
       /* height: 80vh; */
-      width: 40%;
+      width: 60%;
       clip-path: polygon(0% 0%, 00% 0%, 00% 100%, 0% 100%);
       animation: revealOnce 2s ease 0.5s forwards;
     }
@@ -118,16 +141,11 @@ body.fade-in {
     }
   }
 
+
+
 }
 
-.bg {
-  position: fixed;
-  inset: 0;
-  background: url(../assets/images/BannerBG.png) center/cover no-repeat;
-  filter: brightness(1) blur(0px);
-  transition: filter 0.3s ease;
-  z-index: 0;
-}
+
 
 @keyframes revealOnce {
   from {
