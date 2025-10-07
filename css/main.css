@@ -1,11 +1,64 @@
 /* 全域 */
+:root {
+  --white: #fff;
+  --primary300: #BDD4EE;
+  --primary500: #8495B1;
+  --primary700: #474D64;
+  --primary900: #343742;
+  --text-color: #fff;
+  /* --highlight-color: #ff4081; */
+}
+
+h1 {
+  font-size: 72px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  font-size: 48px;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  font-size: 36px;
+  padding: 0;
+  margin: 0;
+}
+
+h4 {
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+h5 {
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+h6 {
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
 
 body {
   margin: 0;
-  font-family: "Noto Sans TC", sans-serif;
+  font-family: "LXGW WenKai Mono TC", "Noto Sans TC", sans-serif;
   overflow: hidden;
   position: relative;
 }
+
 /* 雪花特效 */
 .snowflake {
   position: absolute;
@@ -14,6 +67,7 @@ body {
   font-size: 10px;
   opacity: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .fade-out {
@@ -37,6 +91,8 @@ body.fade-in {
 
 /* 首頁 */
 
+
+
 #index {
   height: 100vh;
 
@@ -46,23 +102,22 @@ body.fade-in {
     justify-content: center;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden;
+
+    img {
+      /* height: 80vh; */
+      width: 40%;
+      clip-path: polygon(0% 0%, 00% 0%, 00% 100%, 0% 100%);
+      animation: revealOnce 2s ease 0.5s forwards;
+    }
+
+    h4 {
+      clip-path: polygon(0% 0%, 00% 0%, 00% 100%, 0% 100%);
+      animation: revealOnce 2s ease 1.5s forwards;
+
+    }
   }
 
-  .LOGO-layer img {
-    /* height: 80vh; */
-    width: 40%;
-    transition: opacity 0.5s ease;
-    
-  }
-
-  .snowflake {
-    position: absolute;
-    top: -10px;
-    color: white;
-    font-size: 10px;
-    opacity: 0;
-    pointer-events: none;
-  }
 }
 
 .bg {
@@ -72,4 +127,14 @@ body.fade-in {
   filter: brightness(1) blur(0px);
   transition: filter 0.3s ease;
   z-index: 0;
+}
+
+@keyframes revealOnce {
+  from {
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+  }
+
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
 }
