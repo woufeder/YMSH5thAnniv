@@ -95,6 +95,10 @@ body.fade-in {
 
 .scene-container {
   height: 100vh;
+  position: relative;
+  overflow: hidden;
+  /* 若頁面有固定背景或 Bootstrap 容器，這行能確保抖動有效 */
+  will-change: transform;
 }
 
 /* 首頁 */
@@ -119,7 +123,7 @@ body.fade-in {
     color: var(--text-color);
     cursor: pointer;
     z-index: 2;
-    
+
 
   }
 
@@ -159,4 +163,49 @@ body.fade-in {
   to {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
+}
+
+
+
+
+
+
+
+
+
+
+/* 抖動動畫 */
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-8px, 2px); }
+  40% { transform: translate(8px, -2px); }
+  60% { transform: translate(-5px, 5px); }
+  80% { transform: translate(5px, -5px); }
+}
+
+/* 強烈抖動 */
+@keyframes shakeStrong {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-15px, 5px); }
+  40% { transform: translate(15px, -5px); }
+  60% { transform: translate(-10px, 10px); }
+  80% { transform: translate(10px, -10px); }
+}
+
+/* 閃光效果 */
+@keyframes flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(2); }
+}
+
+.shake {
+  animation: shake 0.3s ease;
+}
+
+.shakeStrong {
+  animation: shakeStrong 0.8s ease;
+}
+
+.flash {
+  animation: flash 0.4s ease;
 }

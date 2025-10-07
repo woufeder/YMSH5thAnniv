@@ -57,6 +57,9 @@ function showLine() {
 
   clearInterval(typingInterval);
 
+  // 清除舊效果
+  scene?.classList.remove('shake', 'shakeStrong', 'flash');
+
   // 背景
   if (line.bg && line.bg !== bg.src) bg.src = line.bg;
 
@@ -69,11 +72,14 @@ function showLine() {
     dialogueHeader.style.display = 'none';
   }
 
+  // 🔹 在這裡加效果
+  if (line.effect) triggerEffect(line.effect);
+
   // 打字機效果
   textBox.textContent = '';
   const text = replaceVars(line.text || '');
   let i = 0;
-  const speed = 60;
+  const speed = 50;
 
   typingInterval = setInterval(() => {
     textBox.textContent += text[i];

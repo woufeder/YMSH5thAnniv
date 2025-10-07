@@ -243,3 +243,28 @@ function fadeTo(url, element = 'scene-container') {
 window.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('fade-in');
 });
+
+// 畫面效果動畫
+function triggerEffect(type) {
+  const target = document.querySelector('.scene-container') || document.body;
+
+  switch (type) {
+    case 'shake':
+      target.classList.add('shake');
+      setTimeout(() => target.classList.remove('shake'), 600);
+      break;
+
+    case 'shakeStrong':
+      target.classList.add('shakeStrong');
+      setTimeout(() => target.classList.remove('shakeStrong'), 800);
+      break;
+
+    case 'flash':
+      target.classList.add('flash');
+      setTimeout(() => target.classList.remove('flash'), 400);
+      break;
+
+    default:
+      console.warn('未知效果:', type);
+  }
+}
