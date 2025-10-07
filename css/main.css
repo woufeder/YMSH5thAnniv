@@ -89,6 +89,10 @@ body.fade-in {
   opacity: 1;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .scene-container {
   height: 100vh;
 }
