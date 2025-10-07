@@ -229,8 +229,8 @@ function hideLoading(loader) {
 
 
 // 淡入淡出
-function fadeTo(url, elementId = 'scene-container') {
-  const el = document.getElementById(elementId);
+function fadeTo(url, element = 'scene-container') {
+  const el = document.querySelector(`.${element}`);
   if (!el) return;
 
   el.style.transition = 'opacity 0.6s ease';

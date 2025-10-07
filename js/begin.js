@@ -33,7 +33,7 @@ async function init() {
 async function loadDialogue(path) {
   const res = await fetch(path);
   const data = await res.json();
-  dialogue = data.precede || []; // 使用 data.precede
+  dialogue = data.warning || []; // 使用 data.warning
   current = 0;
   showLine();
 }

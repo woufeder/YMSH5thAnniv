@@ -6,6 +6,7 @@ let studentInfo = null;
 // DOM
 const bg = document.querySelector('#bg');
 const nameBox = document.querySelector('#name');
+const dialogueHeader = document.querySelector('.dialogue-header');
 const textBox = document.querySelector('#text');
 const nextBtn = document.querySelector('#nextBtn');
 const inputArea = document.querySelector('#name-input-area');

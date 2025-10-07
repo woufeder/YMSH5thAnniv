@@ -1,5 +1,7 @@
 
-
+body{
+  background-color: #323232;
+}
 
 .hidden {
   display: none !important;
