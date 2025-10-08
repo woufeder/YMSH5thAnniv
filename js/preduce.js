@@ -91,6 +91,7 @@ function showLine() {
 // 變數代換（支援 {{name}}、{{class}}、{{role}}）
 function replaceVars(str) {
   const info = window.playerInfo || {};
+  const inputName = localStorage.getItem('playerInput') || info.name || '';
   return str
     .replaceAll('{{input}}', inputName)
     .replaceAll('{{name}}', info.name || '')
