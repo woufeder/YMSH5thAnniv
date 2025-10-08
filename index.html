@@ -28,7 +28,7 @@
   </div>
 
 
-  <div  class="scene-container container d-flex flex-column justify-content-center align-items-center">
+  <div class="scene-container container d-flex flex-column justify-content-center align-items-center">
 
     <button type="button" class="btn question-icon" data-bs-container="body" data-bs-toggle="popover"
       data-bs-placement="right" data-bs-content="本網為噗浪企劃《永明高中》五周年紀念網站。學生名冊之資料屬於角色創作者，官方僅作資料登入，非企劃玩家請勿挪用或進行二次發布。">
@@ -130,7 +130,7 @@
         return;
       }
 
-      localStorage.setItem('playerName', name);
+      localStorage.setItem('playerInput', name); // 使用者輸入的內容
 
       // 檢查是否載入成功
       if (!window.memberData || !Array.isArray(window.memberData)) {
@@ -139,20 +139,44 @@
         return;
       }
 
-      const found = window.memberData.find(
-        s => s.name.trim().normalize() === name.normalize()
-      );
+      // ✅ 用 normalizeName 處理雙方
+      const normalizedInput = normalizeName(name);
+      const found = window.memberData.find(s => {
+        // 主名比對
+        if (normalizeName(s.name) === normalizedInput) return true;
+        // alias 比對
+        if (Array.isArray(s.alias)) {
+          return s.alias.some(a => normalizeName(a) === normalizedInput);
+        }
+        return false;
+      });
+
+
 
       if (found) {
         localStorage.setItem('playerRole', found.role);
         localStorage.setItem('playerClass', found.class);
+        localStorage.setItem('playerName', found.name); // 名冊內正式名字
       } else {
         localStorage.setItem('playerRole', 'guest');
         localStorage.setItem('playerClass', '訪客');
+        localStorage.setItem('playerName', name); // 沒找到就沿用輸入值
       }
 
       window.location.href = 'preduce.html';
     });
+
+
+
+    // 輸入正規化
+    function normalizeName(str) {
+      return str
+        .normalize('NFKC')
+        .toLowerCase()
+        .replace(/[\u3000]/g, '')
+        .replace(/\s+/g, '')
+        .replace(/[^\p{L}\p{N}]/gu, '');
+    }
   </script>
 
 </body>

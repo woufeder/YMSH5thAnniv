@@ -92,6 +92,7 @@ function showLine() {
 function replaceVars(str) {
   const info = window.playerInfo || {};
   return str
+    .replaceAll('{{input}}', inputName)
     .replaceAll('{{name}}', info.name || '')
     .replaceAll('{{class}}', info.className || '')
     .replaceAll('{{role}}', info.role || '');
