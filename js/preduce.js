@@ -80,10 +80,35 @@ function showLine() {
   const text = replaceVars(line.text || '');
   let i = 0;
   const speed = 50;
+  let pauseUntil = 0; // 用來記錄暫停結束時間
 
+  clearInterval(typingInterval);
   typingInterval = setInterval(() => {
+    // 如果還在暫停中，就先不印字
+    if (Date.now() < pauseUntil) return;
+
+    const remaining = text.slice(i);
+
+    // 🔹偵測停頓標記 <wait> 或 <wait=數字>
+    if (remaining.startsWith('<wait')) {
+      const match = remaining.match(/^<wait=?(\d*)>/);
+      const delay = match && match[1] ? parseInt(match[1]) : 300; // 預設0.3秒
+      pauseUntil = Date.now() + delay;
+      i += match[0].length; // 跳過標記
+      return;
+    }
+
+    // 🔹偵測簡易符號停頓（例如 `|`）
+    if (remaining[0] === '|') {
+      pauseUntil = Date.now() + 500;
+      i++;
+      return;
+    }
+
+    // 一般字元
     textBox.textContent += text[i];
     i++;
+
     if (i >= text.length) clearInterval(typingInterval);
   }, speed);
 }
