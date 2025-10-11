@@ -130,7 +130,7 @@ function nextLine() {
   if (current < dialogue.length) {
     showLine();
   } else {
-    fadeTo('gate.html');
+    fadeTo('map.html');
   }
 }
 

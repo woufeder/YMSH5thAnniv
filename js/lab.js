@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
         switch: '🔘'
     };
 
+    // 可由玩家放置/循環切換的元件清單
+    const placeableComponents = ['empty', 'wire', 'corner'];
+
     function initCircuit() {
         // 創建一個簡單的電路謎題
         circuitGrid = [
@@ -57,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const component = circuitGrid[row][col];
                 cell.textContent = components[component];
                 
-                // 只有空白格子可以點擊
-                if (component === 'empty') {
+                // 允許可放置元件的格子點擊切換（empty/wire/corner）
+                if (placeableComponents.includes(component)) {
                     cell.classList.add('clickable');
                     cell.addEventListener('click', () => placeComponent(row, col));
                 }
@@ -70,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function placeComponent(row, col) {
         // 循環切換電路元件
-        const placeableComponents = ['empty', 'wire', 'corner'];
         const currentIndex = placeableComponents.indexOf(circuitGrid[row][col]);
         const nextIndex = (currentIndex + 1) % placeableComponents.length;
         
